@@ -1,6 +1,7 @@
 import unittest
 from src.model.calculator import *
 import sys
+
 sys.path.append("C:/Users/dsana/PycharmProjects/Calculator/src")
 
 
@@ -224,3 +225,8 @@ class CalculatorTests(unittest.TestCase):
 
         self.assertRaises(InvalidOption, Calculator, total_amount, age,
                           expected_life, fee_time, property_percentage, mortgage_type)
+
+
+if __name__ == '__main__':
+    unittest.main(verbosity=2)
+

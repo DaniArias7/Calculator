@@ -9,11 +9,9 @@ a una persona que ha adquirido una hipoteca inversa.
 - tests: En esta carpeta se encuentran las pruebas unitarias del aplicativo.
 
 ## ¿Cómo se usa?
-Para hacer uso del aplicativo primero debe clonar el repositorio en su dispositivo local.
+Para hacer uso del aplicativo primero debe clonar el repositorio en su dispositivo local. Luego de clonarlo copie, pegue y ejecute el siguiente comando dentro de la consola de comandos: set PYTHONPATH=[ruta de la carpeta donde se clonó el repositorio].
 - Si desea correr la interfaz de usuario, a través de la consola, debe ubicarse dentro de la carpeta 
 haciendo uso del siguiente comando: cd [ruta del archivo]. Posteriormente ubicarse en la ruta src/view 
 y ejecutar la interfaz gráfica con el comando 'python interface.py'.
 - Si desea ejecutar las pruebas unitarias siga el mismo procedimiento anterior y ubicarse en la carpeta tests.
 Una vez en la carpeta tests ejecutar el comando 'python tests.py'.
-
-# Warning: Para correr la interfaz gráfica de usuario es necesario que tenga instalado las librerías de Kivy y Unittest en su sistema.
