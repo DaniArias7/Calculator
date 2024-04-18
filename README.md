@@ -4,6 +4,10 @@ El proyecto consiste en desarrollar una aplicación en Python
 que permita calcular la cuota mensual que un banco le pagaría 
 a una persona que ha adquirido una hipoteca inversa.
 
+## Integrantes del grupo:
+- Diego Sanabria Gómez.
+- Andrés Julián Murillo.
+
 ## Estructura del proyecto:
 - src: En esta carpeta se encuentra la lógica de negocio y la interfaz de usuario.
 - tests: En esta carpeta se encuentran las pruebas unitarias del aplicativo.
