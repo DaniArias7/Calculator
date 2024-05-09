@@ -1,11 +1,11 @@
+import sys
+
+sys.path.append("C:/Users/dsana/Workspace/Calculator")
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 from src.model.calculator import *
-import sys
-
-sys.path.append("C:/Users/dsana/PycharmProjects/Calculator/src")
 
 
 class CalculatorLayout(BoxLayout):
