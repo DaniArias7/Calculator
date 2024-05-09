@@ -84,6 +84,17 @@ class InvalidOption(Exception):
         super().__init__(f'La opción ingresada no es válida. Por favor, seleccione nuevamente.')
 
 
+class ExpectedLifeEqualToAge(Exception):
+    """
+    Custom exception for expected life less or equal than age.
+
+    Excepción personalizada para expectativa de vida menor o igual que la edad.
+    """
+
+    def __init__(self):
+        super().__init__(f'La expectativa de vida no puede ser igual o menor que la edad.')
+
+
 class Calculator:
     def __init__(self, total_amount: int, age: int, expected_life: int, fee_time: int,
                  property_percentage: float, mortgage_type: int):
@@ -136,6 +147,9 @@ class Calculator:
         if mortgage_type not in VALIDS_INPUTS:
             raise InvalidOption()
 
+        if expected_life <= age:
+            raise ExpectedLifeEqualToAge()
+
     def calculate_monthly_fee(self) -> float:
         """
         Calculate the monthly fee or payment based on mortgage type.
@@ -160,7 +174,3 @@ class Calculator:
         elif self.mortgage_type == TOTAL_MORTGAGE:
             pay = self.total_amount * property_percentage_adjusted
             return pay
-
-
-
-
