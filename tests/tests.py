@@ -1,8 +1,9 @@
-import unittest
-from src.model.calculator import *
 import sys
+sys.path.append('.')
+from src.model.calculator import *
 
-sys.path.append("C:/Users/dsana/PycharmProjects/Calculator/src")
+import unittest
+
 
 
 class CalculatorTests(unittest.TestCase):
@@ -39,7 +40,7 @@ class CalculatorTests(unittest.TestCase):
     def test_case_3(self):
         total_amount = 845000000
         age = 77
-        expected_life = 1
+        expected_life = 80
         fee_time = 5
         property_percentage = 2.1
         mortgage_type = 2
@@ -53,7 +54,7 @@ class CalculatorTests(unittest.TestCase):
     def test_case_4(self):
         total_amount = 923000000
         age = 80
-        expected_life = 1
+        expected_life = 95
         fee_time = 10
         property_percentage = 1.9
         mortgage_type = 2
@@ -68,7 +69,7 @@ class CalculatorTests(unittest.TestCase):
     def test_case_5(self):
         total_amount = 900000000
         age = 70
-        expected_life = 1
+        expected_life = 80
         fee_time = 1
         property_percentage = 1.2
         mortgage_type = 3
@@ -82,7 +83,7 @@ class CalculatorTests(unittest.TestCase):
     def test_case_6(self):
         total_amount = 230000000
         age = 65
-        expected_life = 1
+        expected_life = 70
         fee_time = 1
         property_percentage = 1.8
         mortgage_type = 3
