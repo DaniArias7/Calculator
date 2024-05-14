@@ -1,9 +1,6 @@
 .venv
 .idea
-__pycache__
-__pycache__
-__pycache__
-__pycache__
-__pycache__
-__pycache__
-__pycache__
+src\controller\__pycache__
+src\model\__pycache__
+src\view\__pycache__
+
