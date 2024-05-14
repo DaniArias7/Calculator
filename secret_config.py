@@ -1,4 +1,4 @@
-PGHOST='ep-dark-moon-a55vvz3z.us-east-2.aws.neon.tech'
-PGDATABASE='users'
-PGUSER='users_owner'
-PGPASSWORD='iqfDMZ5K9mJB'
+PGHOST='ep-orange-fog-a58tl2fq.us-east-2.aws.neon.tech'
+PGDATABASE='calculatordb'
+PGUSER='calculatordb_owner'
+PGPASSWORD='nvJbSpGWu25m'

@@ -48,11 +48,9 @@ def main():
             # Registrar nuevo usuario
             nombre = input("Ingrese el nombre: ")
             edad = get_int_input("Ingrese la edad: ")
-            tipo_hipoteca = get_int_input("Ingrese el tipo de hipoteca (1: Vitalicia, 2: Parcial, 3: Total): ")
-            num_cuotas = get_int_input("Ingrese el número de cuotas: ")
-            cuota_mensual = get_float_input("Ingrese la cuota mensual: ")
+            
 
-            usuario = Usuario(nombre, edad, tipo_hipoteca, num_cuotas, cuota_mensual)
+            usuario = Usuario(nombre, edad)
             controlador_hipotecas.InsertarUsuario(usuario)
             print("Usuario registrado correctamente.")
 
@@ -72,16 +70,10 @@ def main():
                 if usuario_modificar:
                     nombre = input(f"Ingrese el nuevo nombre (actual: {usuario_modificar.name}): ") or usuario_modificar.name
                     edad = get_int_input(f"Ingrese la nueva edad (actual: {usuario_modificar.age}): ") or usuario_modificar.age
-                    tipo_hipoteca = get_int_input(f"Ingrese el nuevo tipo de hipoteca (actual: {usuario_modificar.mortgage_type}): ") or usuario_modificar.mortgage_type
-                    num_cuotas = get_int_input(f"Ingrese el nuevo número de cuotas (actual: {usuario_modificar.numbers_of_installments}): ") or usuario_modificar.numbers_of_installments
-                    cuota_mensual = get_float_input(f"Ingrese la nueva cuota mensual (actual: {usuario_modificar.monthly_fees}): ") or usuario_modificar.monthly_fees
 
                     usuario_modificar.name = nombre
                     usuario_modificar.age = edad
-                    usuario_modificar.mortgage_type = tipo_hipoteca
-                    usuario_modificar.numbers_of_installments = num_cuotas
-                    usuario_modificar.monthly_fees = cuota_mensual
-
+        
                     controlador_hipotecas.ModificarUsuario(usuario_modificar)
                     print("Usuario modificado correctamente.")
                 else:
@@ -114,7 +106,7 @@ def main():
             else:
                 print("Usuarios registrados:")
                 for usuario in usuarios:
-                    print(f"ID: {usuario.id}, Nombre: {usuario.name}, Edad: {usuario.age}, Tipo de hipoteca: {usuario.mortgage_type}, Número de cuotas: {usuario.numbers_of_installments}, Cuota mensual: {format_number_with_dots(usuario.monthly_fees)}")
+                    print(f"ID: {usuario.id}, Nombre: {usuario.name}, Edad: {usuario.age}")
 
         elif opcion == 5:
             # Calcular hipoteca inversa
@@ -134,14 +126,15 @@ def main():
                     esperanza_vida = get_int_input("Ingrese la esperanza de vida esperada: ")
                     periodo_pago = get_int_input("Ingrese el período de tiempo para las tarifas (en años): ")
                     porcentaje_propiedad = get_float_input("Ingrese el porcentaje de valor de la propiedad: ")
+                    mortgage_type = int(input("Ingrese el tipo de hipoteca (1 para hipoteca vitalicia, 2 para hipoteca parcial, 3 para hipoteca total): "))
 
                     try:
-                        calculadora = Calculator(monto_total, usuario.age, esperanza_vida, periodo_pago, porcentaje_propiedad, usuario.mortgage_type)
+                        calculadora = Calculator(monto_total, usuario.age, esperanza_vida, periodo_pago, porcentaje_propiedad, mortgage_type)
                         cuota_mensual = calculadora.calculate_monthly_fee()
                         print(f"La cuota mensual de la hipoteca inversa es: {format_number_with_dots(cuota_mensual)}")
 
                         # Agregar nueva hipoteca
-                        controlador_hipotecas.InsertarHipoteca(usuario.id, monto_total, datetime.date.today())
+                        controlador_hipotecas.InsertarHipoteca(usuario.id, monto_total, datetime.date.today(), cuota_mensual)
                         print("Hipoteca registrada correctamente.")
                     except Exception as e:
                         print(f"Error: {e}")
