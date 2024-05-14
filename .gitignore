@@ -1,6 +1,4 @@
 .venv
 .idea
-src\controller\__pycache__
-src\model\__pycache__
-src\view\__pycache__
+
 
