@@ -1,10 +1,7 @@
-import sys
-sys.path.append('src')
-
 import unittest
 from datetime import date
-from controller.app_controller import ControladorHipotecas
-from model.user import Usuario
+from src.controller.app_controller import ControladorHipotecas
+from src.model.user import Usuario
 
 class ControladorHipotecasTest(unittest.TestCase):
     @classmethod

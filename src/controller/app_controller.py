@@ -1,8 +1,5 @@
-import sys
-sys.path.append('.')
-
 import psycopg2
-from model.user import Usuario
+from src.model.user import Usuario
 import secret_config
 
 class ControladorHipotecas:

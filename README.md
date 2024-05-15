@@ -20,7 +20,7 @@ a una persona que ha adquirido una hipoteca inversa.
 ## ¿Cómo se usa?
 Para hacer uso del aplicativo asegurese de tener instalado las dependencias necesarias. Una vez tenga las dependencias necesarias prosiga con las instrucciones:
 
-1. Clone el repositorio en su unidad y abra la consola de comandos.
+1. Clone el repositorio en su unidad y abra la consola de comandos. Ejecute el siguiente comando: `set PYTHONPATH=[ruta de la carpeta raiz clonada]`. Ignore los corchetes, por ejemplo, en mi caso el comando quedaría de la siguiente manera: `set PYTHONPATH=C:\Users\dsana\Workspace\Calculator`.
 2. Ubiquese en la raiz de la carpeta clonada. Use el comando `cd [ruta de la carpeta]`.
 3. Si desea correr las pruebas unitarias del modelo del aplicativo:
     - Ubiquese en la carpeta 'tests' de la ruta clonada.

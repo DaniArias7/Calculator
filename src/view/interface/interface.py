@@ -1,6 +1,3 @@
-import sys
-
-sys.path.append("C:/Users/dsana/Workspace/Calculator")
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label

@@ -1,11 +1,7 @@
-import sys
-sys.path.append('src')
-
-
 import datetime
-from model.calculator import *
-from model.user import Usuario
-from controller.app_controller import ControladorHipotecas
+from src.model.calculator import *
+from src.model.user import Usuario
+from src.controller.app_controller import ControladorHipotecas
 
 def format_number_with_dots(number):
     """Formatea el número agregando puntos para facilitar la lectura"""
