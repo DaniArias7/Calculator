@@ -1,5 +1,5 @@
 import sys
-sys.path.append("src")
+sys.path.append('.')
 
 import psycopg2
 from model.user import Usuario
@@ -11,39 +11,64 @@ class ControladorHipotecas:
         cursor = self.ObtenerCursor()
 
         # Crear tabla de usuarios
-        cursor.execute("""CREATE TABLE IF NOT EXISTS usuarios (
-                          id SERIAL PRIMARY KEY,
-                          name TEXT NOT NULL,
-                          age INTEGER NOT NULL
-                          )""")
+        cursor.execute("""DROP TABLE IF EXISTS usuarios CASCADE""")
+        cursor.execute("""CREATE TABLE usuarios (
+                        id SERIAL PRIMARY KEY,
+                        name TEXT NOT NULL,
+                        age INTEGER NOT NULL,
+                        UNIQUE (name, age)
+                        )""")
 
         # Crear tabla de hipotecas
-        cursor.execute("""CREATE TABLE IF NOT EXISTS hipotecas (
-                          id SERIAL PRIMARY KEY,
-                          usuario_id INTEGER NOT NULL,
-                          monto_total FLOAT NOT NULL,
-                          fecha_inicio DATE NOT NULL,
-                          cuota_mensual INTEGER NOT NULL,
-                          FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
-                          )""")
+        cursor.execute("""DROP TABLE IF EXISTS hipotecas""")
+        cursor.execute("""CREATE TABLE hipotecas (
+                        id SERIAL PRIMARY KEY,
+                        usuario_id INTEGER NOT NULL,
+                        monto_total FLOAT NOT NULL,
+                        fecha_inicio DATE NOT NULL,
+                        cuota_mensual INTEGER NOT NULL,
+                        UNIQUE (usuario_id, monto_total, fecha_inicio),
+                        FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+                        )""")
 
         cursor.connection.commit()
 
     def InsertarUsuario(self, usuario):
         """Inserta un nuevo usuario en la base de datos"""
         cursor = self.ObtenerCursor()
-        cursor.execute("""INSERT INTO usuarios (name, age)
-                          VALUES (%s, %s)""",
-                       (usuario.name, usuario.age))
-        cursor.connection.commit()
+        try:
+            cursor.execute("""INSERT INTO usuarios (name, age)
+                          VALUES (%s, %s) RETURNING id""",
+                        (usuario.name, usuario.age))
+            usuario_id = cursor.fetchone()[0]
+            usuario.id = usuario_id
+            cursor.connection.commit()
+        except psycopg2.IntegrityError as e:
+            cursor.connection.rollback()
+            if "duplicate key value violates unique constraint" in str(e):
+                print(f"Error: Ya existe un usuario con el nombre '{usuario.name}' y la edad {usuario.age}.")
+            else:
+                print(f"Error: {e}")
 
     def InsertarHipoteca(self, usuario_id, monto_total, fecha_inicio, cuota_mensual):
         """Inserta una nueva hipoteca en la base de datos"""
         cursor = self.ObtenerCursor()
-        cursor.execute("""INSERT INTO hipotecas (usuario_id, monto_total, fecha_inicio, cuota_mensual)
+        try:
+            cursor.execute("""INSERT INTO hipotecas (usuario_id, monto_total, fecha_inicio, cuota_mensual)
                           VALUES (%s, %s, %s, %s)""",
-                       (usuario_id, monto_total, fecha_inicio, cuota_mensual))
-        cursor.connection.commit()
+                        (usuario_id, monto_total, fecha_inicio, cuota_mensual))
+            cursor.connection.commit()
+        except psycopg2.IntegrityError as e:
+            cursor.connection.rollback()
+            if "duplicate key value violates unique constraint" in str(e):
+                cursor.execute("""UPDATE hipotecas
+                              SET cuota_mensual = %s
+                              WHERE usuario_id = %s AND monto_total = %s AND fecha_inicio = %s""",
+                            (cuota_mensual, usuario_id, monto_total, fecha_inicio))
+                cursor.connection.commit()
+                print("Hipoteca actualizada correctamente.")
+            else:
+                print(f"Error: {e}")
 
     def ModificarUsuario(self, usuario):
         """Modifica los datos de un usuario existente"""
@@ -51,7 +76,7 @@ class ControladorHipotecas:
         cursor.execute("""UPDATE usuarios
                           SET name = %s, age = %s
                           WHERE id = %s""",
-                       (usuario.name, usuario.age,  usuario.id))
+                       (usuario.name, usuario.age, usuario.id))
         cursor.connection.commit()
 
     def EliminarUsuario(self, usuario_id):
