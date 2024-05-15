@@ -15,6 +15,7 @@ a una persona que ha adquirido una hipoteca inversa.
 ## Dependencias: 
 - Asegurese de tener instalado Python en su unidad.
 - Para el funcionamiento de la interfaz gráfica por consola instale la librería kivy. Use el siguiente comando: `pip install Kivy`
+- Tambien se requiere de la librería 'psycopg2' para el funcionamiento de la consola y las pruebas del controlador. Use el siguiente comando para instalar la librería: `pip install psycopg2`.
 
 ## ¿Cómo se usa?
 Para hacer uso del aplicativo asegurese de tener instalado las dependencias necesarias. Una vez tenga las dependencias necesarias prosiga con las instrucciones:
